@@ -1,0 +1,72 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.section {
+    padding: 20px;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.heading {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.image-item {
+    text-align: center;
+}
+
+    .image-item img {
+        max-width: 20%;
+    }
+
+h2 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.paragraph-light {
+    color: #777;
+}
+
+
+
+.slides_img {
+    max-width: 100%; 
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+/* Add more CSS styles as needed */
