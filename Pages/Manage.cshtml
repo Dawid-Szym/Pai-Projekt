@@ -1,0 +1,40 @@
+﻿@page
+@using System.Security.Claims
+@model ekoncert.Pages.ManageModel
+@{
+    ViewData["Title"] = "Manage Events";
+}
+
+<h2>Manage Your Events</h2>
+
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col-12">
+            <a asp-page="/AddEvent" class="btn btn-primary">Add New +</a>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var ev in Model.Events)
+        {
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (ev.CreatedBy.ToString() == currentUserId)
+            {
+                <div class="col-md-4 mb-4 d-flex align-items-stretch">
+                    <div class="card" style="flex-direction: column;">
+                        <!-- Assuming `Url` is for image -->
+                        <img src="@ev.Url" class="card-img-top" alt="Event Image">
+                        <div class="card-body">
+                            <h5 class="card-title">@ev.Name</h5>
+                            <p class="card-text">Start Date: @ev.DateStart?.ToString("yyyy-MM-dd")</p>
+                            <p class="card-text">End Date: @ev.DateEnd?.ToString("yyyy-MM-dd")</p>
+                            <p class="card-text">Tickets Remaining: @ev.TicketsRemaining</p>
+                            <p class="card-text">@ev.Description</p>
+                            <a asp-page="/Edit" asp-route-id="@ev.Id" class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

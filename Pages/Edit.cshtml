@@ -1,0 +1,45 @@
+﻿@page "{id}"
+@model ekoncert.Pages.EditModel
+@{
+    ViewData["Title"] = "Edit Event";
+}
+
+<h2>Edit Event</h2>
+
+<form method="post" enctype="multipart/form-data" asp-validation-summary="ModelOnly">
+    <input type="hidden" asp-for="Event.Id" />
+    <input type="hidden" asp-for="Event.Url" />
+    
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" asp-for="Event.Name" required>
+    </div>
+    <div class="form-group">
+        <label for="startDate">Start Date:</label>
+        <input type="date" class="form-control" id="startDate" asp-for="Event.DateStart" required>
+    </div>
+    <div class="form-group">
+        <label for="endDate">End Date:</label>
+        <input type="date" class="form-control" id="endDate" asp-for="Event.DateEnd" required>
+    </div>
+    <div class="form-group">
+        <label for="ticketsRemaining">Tickets Remaining:</label>
+        <input type="number" class="form-control" id="ticketsRemaining" asp-for="Event.TicketsRemaining" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea class="form-control" id="description" asp-for="Event.Description" required></textarea>
+    </div>
+    <div>
+        <h1></h1>
+    </div>
+    <div class="form-group">
+        <label for="image">Upload Image:</label>
+        <input type="file" class="form-control-file" id="image" name="ImageFile" accept="image/*" asp-for="ImageFile" required>
+    </div>
+
+    <div>
+        <h1></h1>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

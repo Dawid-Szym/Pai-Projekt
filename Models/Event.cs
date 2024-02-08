@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eKoncert.Models
 {
@@ -16,5 +17,13 @@ namespace eKoncert.Models
         public string? Description { get; set; }
 
         public string? Url { get; set; }
+
+        public int? CreatedBy { get; set; }
+
+        [NotMapped]
+        public IFormFile? ImageFile { get; set; }
+        public byte[]? ImageData { get; set; }
+
+        public string? ImageMimeType { get; set; }
     }
 }

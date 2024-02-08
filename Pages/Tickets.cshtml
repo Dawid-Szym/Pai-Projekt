@@ -1,7 +1,56 @@
 ﻿@page
+@using System.Security.Claims
+@model eKoncert.Pages.TicketsModel
 @{
-    ViewData["Title"] = "Tickets";
+	ViewData["Title"] = "Tickets";
 }
-<h1>@ViewData["Title"]</h1>
+<div>
+	<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's Tickets.</p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Event Name</th>
+				<th>Event Date Start</th>
+				<th>Event Date End</th>
+			</tr>
+		</thead>
+		<tbody>
+			@if (Model.TicketList != null && Model.TicketList.Any())
+			{
+				@foreach (var ticket in Model.TicketList)
+				{
+					@if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value == ticket.UserId)
+					{
+						<tr>
+							<td>
+								<a href="/concertDetails?id=@ticket.EventId">
+									<img src="@ticket.ConcertImageUrl" alt="Concert Image" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;" />
+								</a>
+							</td>
+							<td>@ticket.ConcertName</td>
+							<td>@(ticket.StartDate.HasValue ? ticket.StartDate.Value.ToString("yyyy-MM-dd") : "N/A")</td>
+							<td>@(ticket.EndDate.HasValue ? ticket.EndDate.Value.ToString("yyyy-MM-dd") : "N/A")</td>
+							<td>
+								<form method="post" asp-page-handler="RemoveTicket">
+									<input type="hidden" name="ticketId" value="@ticket.Id" />
+									<button type="submit" class="btn btn-danger">Return Ticket</button>
+								</form>
+
+							</td>
+						</tr>
+					}
+				}		}
+			else
+			{
+				<p></p>
+			}
+
+			
+		</tbody>
+	</table>
+</div>
+
+
+

@@ -1,32 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+
 namespace eKoncert.Models
 {
-    public class UserDbContext : DbContext
+    public class TicketsDbContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+
+        public DbSet<Tickets> Tickets { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("UserDb");
+            optionsBuilder.UseInMemoryDatabase("TicketsDb");
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .Property(u => u.Id)
-                .ValueGeneratedOnAdd();
-
-
+            modelBuilder.Entity<Tickets>().Property(t => t.Id).ValueGeneratedOnAdd();
 
 
 
             base.OnModelCreating(modelBuilder);
+
         }
-
-
-
-
-
 
     }
 }

@@ -1,13 +1,43 @@
 ﻿@page "/concertdetails"
 @model eKoncert.Pages.ConcertDetailsModel
 @{
+    ViewData["Title"] = "Concert Details";
 }
 
-<title>Concert Details</title>
+@if (Model.Event != null)
+{
+    <div>
+        <h1>@Model.Event.Name</h1>
+        <h2>Pozostało biletów: @Model.Event.TicketsRemaining</h2>
 
+        @if (Model.HasError)
+        {
+            <div class="alert alert-primary" role="alert">
+                @Model.ErrorMessage
+            </div>
+        }
 
-<div id="concert-details">
-    <!-- Content will be dynamically loaded here -->
-</div>
+        <h2>Data rozpoczęcia: @(Model.Event.DateStart?.ToString("yyyy-MM-dd") ?? "N/A")</h2>
+        <h2>Data zakończenia: @(Model.Event.DateEnd?.ToString("yyyy-MM-dd") ?? "N/A")</h2>
 
-<script src="js/events_listing.js"></script>
+        <div>
+            <img src="@Model.Event.Url" class="card-img-top" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+
+        @if (User.IsInRole("logged user"))
+        {
+            <form method="post">
+                <input type="hidden" name="eventId" value="@Model.Event.Id" />
+                <div style="text-align: center;">
+                    <button type="submit" class="btn btn-primary btn-lg" style="display: block; margin: 0 auto;">Buy Tickets</button>
+                </div>
+            </form>
+        }
+    </div>
+}
+else
+{
+    <div>
+        <h1>Event not found</h1>
+    </div>
+}
